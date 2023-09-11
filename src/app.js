@@ -4,6 +4,7 @@ import cartRouter from './routes/cart.router.js'
 import productsViewRouter from './routes/productsView.router.js'
 import viewsRouter from './routes/views.router.js'
 import cartViewRouter from './routes/cartView.router.js'
+import sessionRouter from './routes/sessions.router.js'
 import loginRouter from './routes/login.router.js'
 import cartManager from './dao/mongoManagers/CartManager.js'
 import handlebars from 'express-handlebars'
@@ -56,6 +57,7 @@ app.use("api/login", loginRouter)
 
 // handlebars routes
 app.use("/api/views", viewsRouter)
+app.use("/api/sessions", sessionRouter)
 app.use("/carts", cartViewRouter)
 app.use("/products", productsViewRouter)
 
