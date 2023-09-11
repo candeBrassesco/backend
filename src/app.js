@@ -12,6 +12,7 @@ import {Server} from "socket.io"
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import FileStore from 'session-file-store'
+import MongoStore from 'connect-mongo'
 import './db/dbConfig.js'
 
 
@@ -35,15 +36,17 @@ app.set('views', __dirname+'/views');
 //cookies
 app.use(cookieParser('secretCookies'))
 
-//sessions
+//sessions Mongo
 const filestore = FileStore(session)
 
-app.use(session({
-    store: new filestore({
-        path: __dirname+'/sessions'
+app.use(
+    session({
+    store: new MongoStore({
+        mongoUrl:'mongodb+srv://candebrassesco:candela99@ecommerce.yti2hga.mongodb.net/?retryWrites=true&w=majority'
     }),
-    secret: 'Secret Session',
-    cookies: {maxAge:60000}
+    secret: 'SecretMongo',
+    resave: false,
+    saveUninitialized: true
 }))
 
 // routes

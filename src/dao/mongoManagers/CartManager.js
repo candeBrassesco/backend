@@ -1,4 +1,4 @@
-import { cartsModel } from "../../db/models/carts.models"
+import { cartsModel } from "../../db/models/carts.models.js"
 
 class CartManager {
 
