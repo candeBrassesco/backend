@@ -2,12 +2,12 @@ import { Router } from "express";
 
 const router = Router()
 
-const publicAcces = (res,req,next) => {
+const publicAcces = (req,res,next) => {
     if(req.session.user) return res.redirect('/profile');
     next();
 }
 
-const privateAcces = (res,req,next) => {
+const privateAcces = (req,res,next) => {
     if(!req.session.user) return res.redirect('/login');
     next();
 }
@@ -24,6 +24,10 @@ router.get('/profile', privateAcces, (req,res) => {
     res.render("profile",{
         user: req.session.user
     })
+})
+
+router.get('/registerError', (req,res) => {
+    res.render("registerError")
 })
 
 export default router

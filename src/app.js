@@ -1,11 +1,4 @@
 import express from 'express'
-import productsRouter from './routes/products.router.js'
-import cartRouter from './routes/cart.router.js'
-import productsViewRouter from './routes/productsView.router.js'
-import viewsRouter from './routes/views.router.js'
-import cartViewRouter from './routes/cartView.router.js'
-import sessionRouter from './routes/sessions.router.js'
-import loginRouter from './routes/login.router.js'
 import cartManager from './dao/mongoManagers/CartManager.js'
 import handlebars from 'express-handlebars'
 import {__dirname} from './utils.js'
@@ -17,6 +10,14 @@ import MongoStore from 'connect-mongo'
 import './db/dbConfig.js'
 import mongoose from 'mongoose'
 
+//routes
+import productsRouter from './routes/products.router.js'
+import cartRouter from './routes/cart.router.js'
+import productsViewRouter from './routes/productsView.router.js'
+import viewsRouter from './routes/views.router.js'
+import cartViewRouter from './routes/cartView.router.js'
+import sessionRouter from './routes/sessions.router.js'
+import loginRouter from './routes/login.router.js'
 
 const app = express()
 

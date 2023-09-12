@@ -1,15 +1,15 @@
 const registerForm = document.getElementById("registerForm")
 
 registerForm.addEventListener("submit", (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const data = new FormData(registerForm);
     const obj = {};
-    data.forEach(( value, key ) => obj[key] = value);
+    data.forEach( (value, key) => obj[key] = value);
     fetch('/api/session/register', {
-        method: 'POST',
+        method:'POST',
         body: JSON.stringify(obj),
-        header: {
-            'Content-Type': 'application/json'
+        headers: {
+            'Content-Type': 'application.json'
         }
     }).then( res => res.json() ).then( json => console.log(json) )
 })

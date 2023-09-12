@@ -9,9 +9,8 @@ router.post('/register', async (req,res) => {
 
     try {
         const userExists = await usersModel.findOne({email})
-
         if(userExists) {
-            return res.status(400).send({status:"error", error: "User already exists"})
+            return res.redirect("/api/views/registerError")
         }
         const user = {
             first_name, last_name, email, age, password 
@@ -30,7 +29,7 @@ router.post('/login', async (req,res) => {
        const user = await usersModel.findOne({email, password})
 
        if(!user){
-          res.status(400).send({status:"error", error: "Please enter a correct email or password"})
+          return res.redirect("/api/views/loginError")
        }
 
        req.session.user = {
