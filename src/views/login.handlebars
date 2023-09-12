@@ -1,10 +1,11 @@
 <h2>Log in</h2>
 
-<form action="/api/login" method="post">
+<form id="loginForm">
      Email: <input type="text" name="email" id="email">
      Password: <input type="password" name="password" id="password">
      <input type="submit" value="Log in">
 </form>
 
-<h3>New User?</h3>
-<button onclick="location.href='/api/views/register'">Sign up</button>
+<p>New User?<a href="/api/session/register">Sign up here!</a></p>
+
+<script src="/js/login.js"></script>

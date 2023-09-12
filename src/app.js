@@ -15,6 +15,7 @@ import session from 'express-session'
 import FileStore from 'session-file-store'
 import MongoStore from 'connect-mongo'
 import './db/dbConfig.js'
+import mongoose from 'mongoose'
 
 
 const app = express()
@@ -38,16 +39,19 @@ app.set('views', __dirname+'/views');
 app.use(cookieParser('secretCookies'))
 
 //sessions Mongo
+const connection = mongoose.connect('mongodb+srv://candebrassesco:candela99@ecommerce.yti2hga.mongodb.net/?retryWrites=true&w=majority')
+
 const filestore = FileStore(session)
 
 app.use(
     session({
     store: new MongoStore({
-        mongoUrl:'mongodb+srv://candebrassesco:candela99@ecommerce.yti2hga.mongodb.net/?retryWrites=true&w=majority'
+        mongoUrl:'mongodb+srv://candebrassesco:candela99@ecommerce.yti2hga.mongodb.net/?retryWrites=true&w=majority',
+        ttl: 3600
     }),
     secret: 'SecretMongo',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false
 }))
 
 // routes
@@ -57,7 +61,7 @@ app.use("api/login", loginRouter)
 
 // handlebars routes
 app.use("/api/views", viewsRouter)
-app.use("/api/sessions", sessionRouter)
+app.use("/api/session", sessionRouter)
 app.use("/carts", cartViewRouter)
 app.use("/products", productsViewRouter)
 

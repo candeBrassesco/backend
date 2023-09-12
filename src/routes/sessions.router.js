@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { usersModel } from "../db/models/users.models";
+import { usersModel } from "../db/models/users.models.js";
 
 
 const router = Router()
@@ -27,7 +27,7 @@ router.post('/login', async (req,res) => {
    const {email, password} = req.body
    
    try {
-       const user = await usersModel.findOne()
+       const user = await usersModel.findOne({email, password})
 
        if(!user){
           res.status(400).send({status:"error", error: "Please enter a correct email or password"})
