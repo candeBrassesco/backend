@@ -17,7 +17,6 @@ import productsViewRouter from './routes/productsView.router.js'
 import viewsRouter from './routes/views.router.js'
 import cartViewRouter from './routes/cartView.router.js'
 import sessionRouter from './routes/sessions.router.js'
-import loginRouter from './routes/login.router.js'
 
 const app = express()
 
@@ -58,7 +57,6 @@ app.use(
 // routes
 app.use("/api/products", productsRouter)
 app.use("/api/cart", cartRouter)
-app.use("api/login", loginRouter)
 
 // handlebars routes
 app.use("/api/views", viewsRouter)

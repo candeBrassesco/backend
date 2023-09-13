@@ -1,14 +1,12 @@
-<h2>Sign up</h2>
+<h2>Sign in</h2>
 
-<form id="registerForm">
+<form action="/api/session/register" method="POST" id="registerForm">
     First name: <input name="first_name" id="first_name">
     Last name: <input name="last_name" id="last_name">
     Email: <input name="email" id="email">
-    Age: <input name="ager" id="age">
-    Password: <input name="passwprd" id="password" type="password">
-    <input type="submit">
+    Age: <input name="age" id="age">
+    Password: <input name="password" id="password" type="password">
+    <input type="submit" value="Sing in">
 </form>
 
-<p>You are already sign up? <a href="/api/views/login">Log in here</a> </p>
-
-<scrip src="/js/register.js"></scrip>
+<p>You are already signed in? <a href="/api/views/login">Log in here</a> </p>

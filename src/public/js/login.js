@@ -1,15 +1,19 @@
-const registerForm = document.getElementById("registerForm")
+const loginForm = document.getElementById("loginForm")
 
-registerForm.addEventListener("submit", (e) => {
+loginForm.addEventListener("submit", (e) => {
     e.preventDefault()
-    const data = new FormData(registerForm);
+    const data = new FormData(loginForm);
     const obj = {};
     data.forEach(( value, key ) => obj[key] = value);
-    fetch('/api/session/register', {
+    fetch('/api/session/login', {
         method: 'POST',
         body: JSON.stringify(obj),
-        header: {
+        headers: {
             'Content-Type': 'application/json'
         }
-    }).then( res => res.json() ).then( json => console.log(json) )
+    }).then( result => {
+        if (result.status == 200) {
+            window.location.replace('/api/views/profile')
+        }
+    })  
 })

@@ -65,7 +65,7 @@ router.put('/:pid', async (req,res) => {
     try {
         const product = await productManager.getProductById(pid)
         if (!product) {
-          return res.status(400).json({ message:'Invalid ID' }) 
+           res.status(400).json({ message:'Invalid ID' }) 
         }
         const productUpdated = await productManager.updateProduct(pid, productUpdate)
         req.status(200).json({message:'Product updated', product: productUpdated})
