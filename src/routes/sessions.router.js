@@ -5,11 +5,15 @@ import { usersModel } from "../db/models/users.models.js";
 const router = Router()
 
 router.post('/register', async (req,res) => {
-    const { first_name, last_name, email, age, password } = req.body
 
-    const userExists = await usersModel.findOne({email})
+    const { first_name, last_name, email, age, password } = req.body
+    
+    if(!first_name || !last_name || !email || !age || !password) {
+        return res.status(400).json({message:'Some data is missing!'})
+    }
+    const userExists = await usersModel.findOne(email)
     if(userExists) {
-        res.redirect("/api/views/registerError")
+        return res.redirect("/api/views/registerError")
     }
 
     const user = {
@@ -17,9 +21,9 @@ router.post('/register', async (req,res) => {
         last_name, 
         email, 
         age, 
-        password, 
-        role: email.includes("admin") ? "admin" : "user" 
+        password 
     }
+
     const newUser = await usersModel.create(user)
     console.log(newUser)
     res.status(200).send({message: "User created", user: newUser})
@@ -30,16 +34,19 @@ router.post('/login', async (req,res) => {
 
     const user = await usersModel.findOne({email, password})
     if(!user){
-        res.redirect("/api/views/loginError")
+        return res.redirect("/api/views/loginError")
     }
+
+    const role = user.email.includes("admin") ? "admin" : "user"
 
     req.session.user = {
         name: `${user.first_name} ${user.last_name} `,
         email: `${user.email}`,
-        age: `${user.age}`
+        age: `${user.age}`,
+        role
     }
 
-    res.status(200).send({payload:req.res.user, message:"First login"})
+    res.redirect('/products')
 })
 
 router.get('/logout', async (req,res) => {
