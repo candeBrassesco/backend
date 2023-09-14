@@ -17,14 +17,12 @@ router.post('/register', async (req,res) => {
         return res.redirect("/api/views/registerError")
     }
 
-    const hashPassword = await hashData(password)
-
     const user = {
         first_name, 
         last_name, 
         email, 
         age, 
-        password: hashPassword
+        password
     }
 
     const newUser = await usersModel.create(user)
