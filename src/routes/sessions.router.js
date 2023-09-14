@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { usersModel } from "../db/models/users.models.js";
+import { hashData } from "../utils.js";
 
 
 const router = Router()
@@ -11,17 +12,19 @@ router.post('/register', async (req,res) => {
     if(!first_name || !last_name || !email || !age || !password) {
         return res.status(400).json({message:'Some data is missing!'})
     }
-    const userExists = await usersModel.findOne(email)
+    const userExists = await usersModel.findOne({email})
     if(userExists) {
         return res.redirect("/api/views/registerError")
     }
+
+    const hashPassword = await hashData(password)
 
     const user = {
         first_name, 
         last_name, 
         email, 
         age, 
-        password 
+        password: hashPassword
     }
 
     const newUser = await usersModel.create(user)
