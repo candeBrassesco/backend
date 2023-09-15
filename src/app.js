@@ -9,6 +9,8 @@ import FileStore from 'session-file-store'
 import MongoStore from 'connect-mongo'
 import './db/dbConfig.js'
 import mongoose from 'mongoose'
+import passport from 'passport'
+import './passport/passportStrategies.js'
 
 //routes
 import productsRouter from './routes/products.router.js'
@@ -53,6 +55,10 @@ app.use(
     resave: false,
     saveUninitialized: false
 }))
+
+//passport
+app.use(passport.initialize()) //inicializa passport
+app.use(passport.session()) // trabaja con sessions
 
 // routes
 app.use("/api/products", productsRouter)

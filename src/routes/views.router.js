@@ -30,4 +30,8 @@ router.get('/registerError', (req,res) => {
     res.render("registerError")
 })
 
+router.get('/loginError', (req,res) =>{
+    res.render("loginError")
+})
+
 export default router
