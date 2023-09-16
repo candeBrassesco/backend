@@ -12,7 +12,7 @@ router.post("/login", passport.authenticate("login",{failureRedirect: "/views/lo
 
 //register con Github
 router.get('/registerGithub', passport.authenticate("github", { scope: [ 'user:email' ] }))
-router.get('/github', passport.authenticate("github"), async (req,res) =>{
+router.get('/github', passport.authenticate("github", {failureRedirect:'/api/views/registerError'}), async (req,res) =>{
     req.session.email = req.user.email
     res.redirect("/products")
 })

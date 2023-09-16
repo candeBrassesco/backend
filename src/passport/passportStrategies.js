@@ -50,13 +50,13 @@ passport.use(new GithubStrategy({
     callbackURL: "http://localhost:8080/api/session/github"
   }, async (accessToken, refreshToken, profile, done) => {
     try {
-        const user = await usersModel.findOne({email:profile._json.email})
+        const user = await usersModel.findOne({email: profile._json.email})
         if(user) {
            done( null, false )
         }
         const newUser = {
-            first_name: profile.displayName.split(' ') [0],
-            last_name: profile.displayName.split(' ') [1] || ' ',
+            first_name: profile._json.name.split(' ') [0],
+            last_name: profile._json.name.split(' ') [1] || ' ',
             email: profile._json.email,
             password: ' '
         }
