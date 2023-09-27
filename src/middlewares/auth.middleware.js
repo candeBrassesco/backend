@@ -1,9 +1,8 @@
-export const authMiddleware = (req,res,next) => {
-    const {role} = req.body
-    if (role === 'ADMIN') {
+export const authMiddleware = role => {
+    return (req, res, next) => {
+        if (req.user.role !== role) {
+            return res.status(401).json('You are not authorized')
+        }
         next()
-    } else {
-        res.status(401).send('Not authorized')
     }
-
 }

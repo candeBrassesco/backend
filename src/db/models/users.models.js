@@ -22,6 +22,16 @@ const usersSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    role: {
+        type: String,
+        enum: ['admin', 'user'],
+        default: 'user',
+    },
+    cart: {
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'Carts',
+        default: null,
     }
 })
 

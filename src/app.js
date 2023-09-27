@@ -12,13 +12,14 @@ import mongoose from 'mongoose'
 import passport from 'passport'
 import './passport/passportStrategies.js'
 
-//routes
+//routers
 import productsRouter from './routes/products.router.js'
 import cartRouter from './routes/cart.router.js'
 import productsViewRouter from './routes/productsView.router.js'
 import viewsRouter from './routes/views.router.js'
 import cartViewRouter from './routes/cartView.router.js'
 import sessionRouter from './routes/sessions.router.js'
+
 
 const app = express()
 
