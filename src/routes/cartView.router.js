@@ -1,18 +1,9 @@
 import { Router } from "express";
-import cartManager from "../dao/mongoManagers/CartManager.js";
+import { viewCartControler } from "../controllers/carts.controller.js";
+
 
 const router = Router()
 
-router.get('/:cid', async (req,res) => {
-    const {cid} = req.params
-    try {
-        const cart = await cartManager.getCartsById(cid)
-        const cartProducts = cart.products
-        res.render("cart", {products: cartProducts})
-    } catch (error) {
-        return error
-    }
-    
-})
+router.get('/:cid', viewCartControler)
 
 export default router

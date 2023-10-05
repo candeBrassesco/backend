@@ -1,4 +1,4 @@
-import { usersModel } from "../db/models/users.models.js";
+import { usersModel } from "../../db/models/users.models.js"
 
 class UserManager {
 
@@ -13,8 +13,17 @@ class UserManager {
 
     async findUser(email) {
         try {
-            const user = await usersModel.findOne(email)
+            const user = await usersModel.findOne({email})
             return user
+        } catch (error) {
+            return error
+        }
+    }
+
+    async updateOne(idUser, idCart){
+        try {
+            const updateUser = await userModel.updateOne({_id:idUser},{$set:{cart:idCart}})
+            return updateUser
         } catch (error) {
             return error
         }

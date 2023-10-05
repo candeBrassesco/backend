@@ -1,37 +1,18 @@
 import { Router } from "express";
+import { privateAcces, publicAcces } from "../middlewares/acces.middleware.js";
+import { loginErrorViewController, loginViewController, profileViewController, registerErrorViewController, registerViewController } from "../controllers/users.controller.js";
 
 const router = Router()
 
-const publicAcces = (req,res,next) => {
-    if(req.session.user) return res.redirect('/profile');
-    next();
-}
 
-const privateAcces = (req,res,next) => {
-    if(!req.session.user) return res.redirect('/login');
-    next();
-}
+router.get('/login', publicAcces, loginViewController)
 
-router.get('/login', publicAcces, (req,res) =>{
-    res.render("login")
-})
+router.get('/register', publicAcces, registerViewController)
 
-router.get('/register', publicAcces, (req,res) => {
-    res.render("register")
-})
+router.get('/profile', privateAcces, profileViewController)
 
-router.get('/profile', privateAcces, (req,res) => {
-    res.render("profile",{
-        user: req.session.user
-    })
-})
+router.get('/registerError', registerErrorViewController)
 
-router.get('/registerError', (req,res) => {
-    res.render("registerError")
-})
-
-router.get('/loginError', (req,res) =>{
-    res.render("loginError")
-})
+router.get('/loginError', loginErrorViewController)
 
 export default router

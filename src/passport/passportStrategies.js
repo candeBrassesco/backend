@@ -5,8 +5,9 @@ import { Strategy as GithubStrategy } from "passport-github2";
 import { ExtractJwt, Strategy as JWTStrategy } from "passport-jwt"
 import { compareData, cookieExtractor } from "../utils.js";
 import { hashData } from "../utils.js";
+import config from "../config.js";
 
-const JWT_SECRET_KEY = 'secretJWT'
+const JWT_SECRET_KEY = config.JWT_SECRET_KEY
 
 // local strategy
 

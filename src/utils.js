@@ -2,8 +2,9 @@ import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import config from './config.js'
 
-const JWT_SECRET_KEY = 'secretJWT'
+const JWT_SECRET_KEY = config.JWT_SECRET_KEY
 
 //__dirname
 export const __dirname = dirname(fileURLToPath(import.meta.url))

@@ -11,6 +11,7 @@ import './db/dbConfig.js'
 import mongoose from 'mongoose'
 import passport from 'passport'
 import './passport/passportStrategies.js'
+import config from './config.js'
 
 //routers
 import productsRouter from './routes/products.router.js'
@@ -42,14 +43,14 @@ app.set('views', __dirname+'/views');
 app.use(cookieParser('secretCookies'))
 
 //sessions Mongo
-const connection = mongoose.connect('mongodb+srv://candebrassesco:candela99@ecommerce.yti2hga.mongodb.net/?retryWrites=true&w=majority')
+const connection = mongoose.connect(config.MONGO_URL)
 
 const filestore = FileStore(session)
 
 app.use(
     session({
     store: new MongoStore({
-        mongoUrl:'mongodb+srv://candebrassesco:candela99@ecommerce.yti2hga.mongodb.net/?retryWrites=true&w=majority',
+        mongoUrl: config.MONGO_URL,
         ttl: 3600
     }),
     secret: 'SecretMongo',
@@ -72,8 +73,7 @@ app.use("/carts", cartViewRouter)
 app.use("/products", productsViewRouter)
 
 
-const PORT = 8080
-
+const PORT = config.PORT
 // escucha solicitudes del puerto 8080
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando al puerto ${PORT}`)
